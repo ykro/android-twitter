@@ -31,6 +31,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "TWITTER_KEY", project.property('TWITTER_KEY')
+            buildConfigField "String", "TWITTER_SECRET", project.property('TWITTER_SECRET')
+        }
+
+        debug {
+            buildConfigField "String", "TWITTER_KEY", project.property('TWITTER_KEY')
+            buildConfigField "String", "TWITTER_SECRET", project.property('TWITTER_SECRET')
         }
     }
 }
