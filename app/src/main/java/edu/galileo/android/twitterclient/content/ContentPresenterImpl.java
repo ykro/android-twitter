@@ -5,7 +5,7 @@ import com.twitter.sdk.android.core.TwitterSession;
 
 import java.util.List;
 
-import edu.galileo.android.twitterclient.entities.TweetModel;
+import edu.galileo.android.twitterclient.entities.TweetEntity;
 import edu.galileo.android.twitterclient.events.TweetEvent;
 import edu.galileo.android.twitterclient.lib.EventBus;
 
@@ -41,31 +41,34 @@ public class ContentPresenterImpl implements ContentPresenter {
     }
 
     @Override
-    public void getImages() {
-        this.contentInteractor.getImageItemsList();
-    }
+    public void getTweets(int type){
+        if (this.loginView != null){
+            loginView.hideList();
+            loginView.showProgress();
+        }
 
-    @Override
-    public void getHashtags() {
-        this.contentInteractor.getHashtagItemsList();
+        if (type == TweetEntity.IMAGES_CONTENT) {
+            this.contentInteractor.getImageItemsList();
+        } else {
+            this.contentInteractor.getHashtagItemsList();
+        }
+
     }
 
     @Override
     public void onEventMainThread(TweetEvent event) {
         String errorMsg = event.getError();
-        if (errorMsg == null) {
-            if (this.loginView != null) {
-                List<TweetModel> items = event.getItems();
+        if (this.loginView != null) {
+            loginView.showList();
+            loginView.hideProgress();
+            if (errorMsg != null) {
+                this.loginView.onImagesError(errorMsg);
+            } else {
+                List<TweetEntity> items = event.getItems();
                 if (items != null && !items.isEmpty()) {
                     this.loginView.setItems(items);
                 }
-
-            }
-        } else {
-            if (this.loginView != null) {
-                this.loginView.onImagesError(errorMsg);
             }
         }
-
     }
 }

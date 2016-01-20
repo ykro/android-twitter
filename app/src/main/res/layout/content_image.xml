@@ -6,8 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/activity_horizontal_margin">
+        android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="match_parent"
@@ -22,7 +21,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:text="Large Text"
             android:id="@+id/txtTweet"

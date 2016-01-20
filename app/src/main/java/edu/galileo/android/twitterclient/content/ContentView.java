@@ -2,7 +2,7 @@ package edu.galileo.android.twitterclient.content;
 
 import java.util.List;
 
-import edu.galileo.android.twitterclient.entities.TweetModel;
+import edu.galileo.android.twitterclient.entities.TweetEntity;
 
 /**
  * Created by ykro.
@@ -14,5 +14,5 @@ public interface ContentView {
     void hideProgress();
 
     void onImagesError(String error);
-    void setItems(List<TweetModel> items);
+    void setItems(List<TweetEntity> items);
 }

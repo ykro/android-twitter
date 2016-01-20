@@ -9,8 +9,6 @@ public interface ContentPresenter {
     void onResume();
     void onPause();
     void onDestroy();
-    void getImages();
-    void getHashtags();
-
+    void getTweets(int type);
     void onEventMainThread(TweetEvent event);
 }

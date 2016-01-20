@@ -16,24 +16,22 @@ import edu.galileo.android.twitterclient.entities.TweetEntity;
 /**
  * Created by ykro.
  */
-public class HashtagsAdapter extends RecyclerView.Adapter<HashtagsAdapter.ViewHolder> {
+public class HashtagsTextAdapter extends RecyclerView.Adapter<HashtagsTextAdapter.ViewHolder> {
     private List<TweetEntity> items;
 
-    public HashtagsAdapter(List<TweetEntity> items) {
+    public HashtagsTextAdapter(List<TweetEntity> items) {
         this.items = items;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_hashtag, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_hashtag_text, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        TweetEntity tweet = items.get(position);
-        holder.txtTweet.setText(tweet.getTweetText());
-
+        holder.txtHashtag.setText(items.get(position).toString());
     }
 
     @Override
@@ -42,8 +40,7 @@ public class HashtagsAdapter extends RecyclerView.Adapter<HashtagsAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.txtTweet) TextView txtTweet;
-        @Bind(R.id.recyclerViewHashtags)  RecyclerView recyclerView;
+        @Bind(R.id.txtHashtag) TextView txtHashtag;
 
         public ViewHolder(View view) {
             super(view);

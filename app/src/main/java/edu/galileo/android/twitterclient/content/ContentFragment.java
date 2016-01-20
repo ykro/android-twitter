@@ -21,16 +21,14 @@ import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
 import edu.galileo.android.twitterclient.adapters.HashtagsAdapter;
 import edu.galileo.android.twitterclient.adapters.ImagesAdapter;
-import edu.galileo.android.twitterclient.entities.TweetModel;
+import edu.galileo.android.twitterclient.entities.TweetEntity;
 
 public class ContentFragment extends Fragment
                             implements ContentView {
-    public final static int IMAGES_CONTENT = 0;
-    public final static int HASHTAGS_CONTENT = 1;
     public final static String CONTENT_TYPE_PARAM = "content_type";
 
     private int contentType;
-    private List<TweetModel> items;
+    private List<TweetEntity> items;
     private RecyclerView.Adapter adapter;
     private ContentPresenter contentPresenter;
     private RecyclerView.LayoutManager layoutManager;
@@ -46,7 +44,7 @@ public class ContentFragment extends Fragment
     public static ContentFragment newImagesFragmentInstance() {
         ContentFragment fragment = new ContentFragment();
         Bundle args = new Bundle();
-        args.putInt(CONTENT_TYPE_PARAM, IMAGES_CONTENT);
+        args.putInt(CONTENT_TYPE_PARAM, TweetEntity.IMAGES_CONTENT);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,7 +52,7 @@ public class ContentFragment extends Fragment
     public static ContentFragment newHashtagsFragmentInstance() {
         ContentFragment fragment = new ContentFragment();
         Bundle args = new Bundle();
-        args.putInt(CONTENT_TYPE_PARAM, HASHTAGS_CONTENT);
+        args.putInt(CONTENT_TYPE_PARAM, TweetEntity.HASHTAGS_CONTENT);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,20 +60,9 @@ public class ContentFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        items = new ArrayList<TweetModel>();
+        items = new ArrayList<TweetEntity>();
         if (getArguments() != null) {
             this.contentType = getArguments().getInt(CONTENT_TYPE_PARAM);
-
-            if (contentType == IMAGES_CONTENT) {
-                layoutManager = new GridLayoutManager(getActivity(), 2);
-                adapter = new ImagesAdapter(getContext().getApplicationContext(), items);
-                contentPresenter.getImages();
-
-            } else if (contentType == HASHTAGS_CONTENT) {
-                layoutManager = new LinearLayoutManager(getActivity());
-                adapter = new HashtagsAdapter(items);
-                contentPresenter.getHashtags();
-            }
         }
     }
 
@@ -103,8 +90,18 @@ public class ContentFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this, view);
 
+        if (contentType == TweetEntity.IMAGES_CONTENT) {
+            layoutManager = new GridLayoutManager(getActivity(), 2);
+            adapter = new ImagesAdapter(getContext().getApplicationContext(), items);
+        } else if (contentType == TweetEntity.HASHTAGS_CONTENT) {
+            layoutManager = new LinearLayoutManager(getActivity());
+            adapter = new HashtagsAdapter(items);
+        }
+
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        contentPresenter.getTweets(contentType);
         return view;
     }
 
@@ -114,7 +111,7 @@ public class ContentFragment extends Fragment
     }
 
     @Override
-    public void setItems(List<TweetModel> newItems) {
+    public void setItems(List<TweetEntity> newItems) {
         items.addAll(newItems);
         adapter.notifyDataSetChanged();
     }

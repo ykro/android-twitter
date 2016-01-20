@@ -5,13 +5,15 @@ import java.util.List;
 /**
  * Created by ykro.
  */
-public class TweetModel {
+public class TweetEntity {
     private String id;
     List<String> hashtags;
-    private  String imageURL;
+    private String imageURL;
     private String tweetText;
     private int favoriteCount;
 
+    public final static int IMAGES_CONTENT = 0;
+    public final static int HASHTAGS_CONTENT = 1;
     private final static String BASE_TWEET_URL = "https://twitter.com/statuses/";
 
     public String getId() {
