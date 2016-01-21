@@ -40,13 +40,10 @@ public class HashtagsInteractorImpl implements HashtagsInteractor {
                             if (checkIfTweetHasHashtags(tweet)) {
                                 Hashtag tweetModel = new Hashtag();
 
+                                tweetModel.setId(tweet.idStr);
                                 tweetModel.setTweetText(tweet.text);
-
-                                int favCount = tweet.favoriteCount;
-                                tweetModel.setFavoriteCount(favCount);
-
-                                String tweetId = tweet.idStr;
-                                tweetModel.setId(tweetId);
+                                tweetModel.setAuthor(tweet.user.screenName);
+                                tweetModel.setFavoriteCount(tweet.favoriteCount);
 
                                 List<String> hashtags = new ArrayList<String>();
                                 for (HashtagEntity hashtag : tweet.entities.hashtags) {

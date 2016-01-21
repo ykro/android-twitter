@@ -41,15 +41,13 @@ public class ImagesInteractorImpl implements ImagesInteractor {
                             if (checkIfTweetHasImage(tweet)) {
                                 Image tweetModel = new Image();
 
+                                tweetModel.setId(tweet.idStr);
+                                tweetModel.setAuthor(tweet.user.screenName);
+                                tweetModel.setFavoriteCount(tweet.favoriteCount);
+
                                 String tweetText = tweet.text;
                                 tweetText = tweetText.substring(0,tweetText.indexOf("http"));
                                 tweetModel.setTweetText(tweetText);
-
-                                int favCount = tweet.favoriteCount;
-                                tweetModel.setFavoriteCount(favCount);
-
-                                String tweetId = tweet.idStr;
-                                tweetModel.setId(tweetId);
 
                                 MediaEntity currentPhoto = tweet.entities.media.get(0);
                                 String imageURL = currentPhoto.mediaUrl;
