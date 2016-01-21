@@ -63,7 +63,10 @@ public class HashtagsFragment extends Fragment
 
         items = new ArrayList<Hashtag>();
         adapter = new HashtagsAdapter(getContext().getApplicationContext(), items, this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        //layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
         hashtagsPresenter.getHashtagTweets();

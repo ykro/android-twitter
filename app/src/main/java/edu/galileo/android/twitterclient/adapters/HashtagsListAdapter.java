@@ -1,7 +1,5 @@
 package edu.galileo.android.twitterclient.adapters;
 
-import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +15,10 @@ import edu.galileo.android.twitterclient.R;
 /**
  * Created by ykro.
  */
-public class HashtagsTextAdapter extends RecyclerView.Adapter<HashtagsTextAdapter.ViewHolder> {
+public class HashtagsListAdapter extends RecyclerView.Adapter<HashtagsListAdapter.ViewHolder> {
     private List<String> items;
 
-    public HashtagsTextAdapter(List<String> items) {
+    public HashtagsListAdapter(List<String> items) {
         this.items = items;
     }
 
