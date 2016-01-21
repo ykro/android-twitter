@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.api;
+package edu.galileo.android.twitterclient.images;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -11,32 +11,32 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import edu.galileo.android.twitterclient.api.APIHelper;
+import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
 import edu.galileo.android.twitterclient.entities.Image;
-import edu.galileo.android.twitterclient.images.ImagesEvent;
 import edu.galileo.android.twitterclient.lib.EventBus;
 
 /**
  * Created by ykro.
  */
-public class ImagesAPI {
+public class ImagesRepository {
     CustomTwitterApiClient client;
     private final static int TWEET_COUNT = 50;
 
     private static class SingletonHolder {
-        private static final ImagesAPI INSTANCE = new ImagesAPI();
+        private static final ImagesRepository INSTANCE = new ImagesRepository();
     }
 
-    public static ImagesAPI getInstance() {
+    public static ImagesRepository getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
-    public ImagesAPI() {
+    public ImagesRepository() {
         APIHelper helper = APIHelper.getInstance();
         this.client = helper.getAPIClient();
     }
 
     public void getImages(){
-        final ImagesEvent event = new ImagesEvent();
         client.getTimelineService().homeTimeline(TWEET_COUNT, true, true, true, true,
                 new Callback<List<Tweet>>() {
                     @Override
@@ -48,7 +48,6 @@ public class ImagesAPI {
                                 Image tweetModel = new Image();
 
                                 tweetModel.setId(tweet.idStr);
-                                tweetModel.setAuthor(tweet.user.screenName);
                                 tweetModel.setFavoriteCount(tweet.favoriteCount);
 
                                 String tweetText = tweet.text;

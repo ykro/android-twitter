@@ -1,20 +1,18 @@
 package edu.galileo.android.twitterclient.images;
 
-import edu.galileo.android.twitterclient.api.ImagesAPI;
-
 /**
  * Created by ykro.
  */
 public class ImagesInteractorImpl implements ImagesInteractor {
-    private ImagesAPI imagesAPI;
+    private ImagesRepository imagesRepository;
 
     public ImagesInteractorImpl() {
-        this.imagesAPI = ImagesAPI.getInstance();
+        this.imagesRepository = ImagesRepository.getInstance();
     }
 
     @Override
     public void getImageItemsList() {
-        this.imagesAPI.getImages();
+        this.imagesRepository.getImages();
 
     }
 }

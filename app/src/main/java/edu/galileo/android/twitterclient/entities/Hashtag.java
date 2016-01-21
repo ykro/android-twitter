@@ -7,13 +7,12 @@ import java.util.List;
  */
 public class Hashtag {
     private String id;
-    private String author;
     private String imageURL;
     private String tweetText;
     private int favoriteCount;
     private List<String> hashtags;
 
-    private final static String BASE_TWEET_URL = "https://twitter.com/";
+    private final static String BASE_TWEET_URL = "https://twitter.com/null/status/";
 
     public String getId() {
         return id;
@@ -21,14 +20,6 @@ public class Hashtag {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getTweetText() {
@@ -64,6 +55,6 @@ public class Hashtag {
     }
 
     public String getTweetURL() {
-        return BASE_TWEET_URL + this.author + "/status/" + this.id;
+        return BASE_TWEET_URL + this.id;
     }
 }

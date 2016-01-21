@@ -1,19 +1,17 @@
 package edu.galileo.android.twitterclient.hashtags;
 
-import edu.galileo.android.twitterclient.api.HashtagsAPI;
-
 /**
  * Created by ykro.
  */
 public class HashtagsInteractorImpl implements HashtagsInteractor {
-    private HashtagsAPI hashtagsAPI;
+    private HashtagsRepository hashtagsRepository;
 
     public HashtagsInteractorImpl() {
-        this.hashtagsAPI = HashtagsAPI.getInstance();
+        this.hashtagsRepository = HashtagsRepository.getInstance();
     }
 
     @Override
     public void getHashtagItemsList() {
-        hashtagsAPI.getHashtags();
+        hashtagsRepository.getHashtags();
     }
 }

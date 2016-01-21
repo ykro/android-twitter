@@ -5,11 +5,10 @@ package edu.galileo.android.twitterclient.entities;
  */
 public class Image {
     private String id;
-    private String author;
     private String imageURL;
     private String tweetText;
     private int favoriteCount;
-    private final static String BASE_TWEET_URL = "https://twitter.com/";
+    private final static String BASE_TWEET_URL = "https://twitter.com/null/status/";
 
     public String getId() {
         return id;
@@ -17,14 +16,6 @@ public class Image {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getTweetText() {
@@ -52,6 +43,6 @@ public class Image {
     }
 
     public String getTweetURL() {
-        return BASE_TWEET_URL + this.author + "/status/" + this.id;
+        return BASE_TWEET_URL + this.id;
     }
 }
