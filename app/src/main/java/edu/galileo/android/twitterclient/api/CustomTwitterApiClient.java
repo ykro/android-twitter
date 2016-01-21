@@ -6,9 +6,9 @@ import com.twitter.sdk.android.core.TwitterApiClient;
 /**
  * Created by ykro.
  */
-public class ApiClient extends TwitterApiClient {
+public class CustomTwitterApiClient extends TwitterApiClient {
 
-    public ApiClient(Session session) {
+    public CustomTwitterApiClient(Session session) {
         super(session);
     }
 

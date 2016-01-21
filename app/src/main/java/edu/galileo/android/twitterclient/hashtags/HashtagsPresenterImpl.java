@@ -1,8 +1,5 @@
 package edu.galileo.android.twitterclient.hashtags;
 
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterSession;
-
 import java.util.List;
 
 import edu.galileo.android.twitterclient.entities.Hashtag;
@@ -19,9 +16,7 @@ public class HashtagsPresenterImpl implements HashtagsPresenter {
     public HashtagsPresenterImpl(HashtagsView hashtagsView) {
         this.hashtagsView = hashtagsView;
         this.eventBus = EventBus.getInstance();
-
-        TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
-        this.hashtagsInteractor = new HashtagsInteractorImpl(session);
+        this.hashtagsInteractor = new HashtagsInteractorImpl();
     }
 
     @Override

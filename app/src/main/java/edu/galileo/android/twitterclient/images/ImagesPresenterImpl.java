@@ -19,9 +19,7 @@ public class ImagesPresenterImpl implements ImagesPresenter {
     public ImagesPresenterImpl(ImagesView imagesView) {
         this.imagesView = imagesView;
         this.eventBus = EventBus.getInstance();
-
-        TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
-        this.imagesInteractor = new ImagesInteractorImpl(session);
+        this.imagesInteractor = new ImagesInteractorImpl();
     }
 
     @Override
