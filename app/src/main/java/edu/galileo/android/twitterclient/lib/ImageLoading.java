@@ -16,7 +16,7 @@ public class ImageLoading {
     }
 
     public void loadImage(String url, ImageView view) {
-        Glide.with(context.getApplicationContext())
+        Glide.with(context)
                 .load(url)
                 .into(view);
     }

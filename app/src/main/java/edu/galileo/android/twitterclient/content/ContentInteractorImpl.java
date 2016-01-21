@@ -1,5 +1,7 @@
 package edu.galileo.android.twitterclient.content;
 
+import android.util.Log;
+
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
@@ -49,14 +51,12 @@ public class ContentInteractorImpl implements ContentInteractor {
 
                                 String tweetId = tweet.idStr;
                                 tweetModel.setId(tweetId);
+                                Log.e("ID",tweet.idStr);
 
-                                //defaults to medium
                                 MediaEntity currentPhoto = tweet.entities.media.get(0);
                                 String imageURL = currentPhoto.mediaUrl;
-                                if (currentPhoto.sizes.large != null) {
-                                    imageURL += ":large";
-                                }
                                 tweetModel.setImageURL(imageURL);
+
                                 items.add(tweetModel);
                             }
                         }

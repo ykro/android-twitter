@@ -1,5 +1,7 @@
 package edu.galileo.android.twitterclient.adapters;
 
+import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +13,14 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.entities.TweetEntity;
 
 /**
  * Created by ykro.
  */
 public class HashtagsTextAdapter extends RecyclerView.Adapter<HashtagsTextAdapter.ViewHolder> {
-    private List<TweetEntity> items;
+    private List<String> items;
 
-    public HashtagsTextAdapter(List<TweetEntity> items) {
+    public HashtagsTextAdapter(List<String> items) {
         this.items = items;
     }
 
@@ -40,12 +41,12 @@ public class HashtagsTextAdapter extends RecyclerView.Adapter<HashtagsTextAdapte
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.txtHashtag) TextView txtHashtag;
+        @Bind(R.id.txtHashtag)
+        TextView txtHashtag;
 
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
     }
-
 }

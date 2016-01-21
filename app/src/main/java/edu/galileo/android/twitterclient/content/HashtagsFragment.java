@@ -1,10 +1,11 @@
 package edu.galileo.android.twitterclient.content;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,50 +21,20 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
 import edu.galileo.android.twitterclient.adapters.HashtagsAdapter;
-import edu.galileo.android.twitterclient.adapters.ImagesAdapter;
 import edu.galileo.android.twitterclient.entities.TweetEntity;
 
-public class ContentFragment extends Fragment
-                            implements ContentView {
-    public final static String CONTENT_TYPE_PARAM = "content_type";
-
-    private int contentType;
+public class HashtagsFragment extends Fragment
+                            implements ContentView, OnItemClickListener {
     private List<TweetEntity> items;
     private RecyclerView.Adapter adapter;
     private ContentPresenter contentPresenter;
-    private RecyclerView.LayoutManager layoutManager;
 
     @Bind(R.id.container) FrameLayout container;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.recyclerView)  RecyclerView recyclerView;
 
-    public ContentFragment() {
+    public HashtagsFragment() {
         contentPresenter = new ContentPresenterImpl(this);
-    }
-
-    public static ContentFragment newImagesFragmentInstance() {
-        ContentFragment fragment = new ContentFragment();
-        Bundle args = new Bundle();
-        args.putInt(CONTENT_TYPE_PARAM, TweetEntity.IMAGES_CONTENT);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public static ContentFragment newHashtagsFragmentInstance() {
-        ContentFragment fragment = new ContentFragment();
-        Bundle args = new Bundle();
-        args.putInt(CONTENT_TYPE_PARAM, TweetEntity.HASHTAGS_CONTENT);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        items = new ArrayList<TweetEntity>();
-        if (getArguments() != null) {
-            this.contentType = getArguments().getInt(CONTENT_TYPE_PARAM);
-        }
     }
 
     @Override
@@ -90,18 +61,12 @@ public class ContentFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this, view);
 
-        if (contentType == TweetEntity.IMAGES_CONTENT) {
-            layoutManager = new GridLayoutManager(getActivity(), 2);
-            adapter = new ImagesAdapter(getContext().getApplicationContext(), items);
-        } else if (contentType == TweetEntity.HASHTAGS_CONTENT) {
-            layoutManager = new LinearLayoutManager(getActivity());
-            adapter = new HashtagsAdapter(items);
-        }
-
-        recyclerView.setLayoutManager(layoutManager);
+        items = new ArrayList<TweetEntity>();
+        adapter = new HashtagsAdapter(getContext().getApplicationContext(), items, this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
-        contentPresenter.getTweets(contentType);
+        contentPresenter.getTweets(TweetEntity.HASHTAGS_CONTENT);
         return view;
     }
 
@@ -136,4 +101,9 @@ public class ContentFragment extends Fragment
         progressBar.setVisibility(View.GONE);
     }
 
+    @Override
+    public void onItemClick(TweetEntity tweet) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(tweet.getTweetURL()));
+        startActivity(intent);
+    }
 }

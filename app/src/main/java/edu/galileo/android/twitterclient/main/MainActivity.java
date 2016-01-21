@@ -3,8 +3,6 @@ package edu.galileo.android.twitterclient.main;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.content.ContentFragment;
+import edu.galileo.android.twitterclient.adapters.SectionsPagerAdapter;
+import edu.galileo.android.twitterclient.content.HashtagsFragment;
+import edu.galileo.android.twitterclient.content.ImagesFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,10 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),
-                                new Fragment[] {ContentFragment.newImagesFragmentInstance(),
-                                                ContentFragment.newHashtagsFragmentInstance()});
+        Fragment[] fragments = new Fragment[] {new ImagesFragment(),
+                                             new HashtagsFragment()};
+        String[] titles = new String[] {getString(R.string.main_header_hashtags),
+                                        getString(R.string.main_header_images)};
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), fragments, titles);
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -54,34 +55,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-        private Fragment[] contentFragments;
-        public SectionsPagerAdapter(FragmentManager fm, Fragment[] contentFragments) {
-            super(fm);
-            this.contentFragments = contentFragments;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return contentFragments[position];
-        }
-
-        @Override
-        public int getCount() {
-            return this.contentFragments.length;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return getString(R.string.main_header_images);
-                case 1:
-                    return getString(R.string.main_header_hashtags);
-            }
-            return null;
-        }
     }
 }

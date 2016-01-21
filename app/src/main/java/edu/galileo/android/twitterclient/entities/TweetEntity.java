@@ -15,6 +15,7 @@ public class TweetEntity {
     public final static int IMAGES_CONTENT = 0;
     public final static int HASHTAGS_CONTENT = 1;
     private final static String BASE_TWEET_URL = "https://twitter.com/statuses/";
+    private final static String BASE_HASHTAG_URL = "https://twitter.com/hashtag/";
 
     public String getId() {
         return id;
@@ -58,5 +59,9 @@ public class TweetEntity {
 
     public String getTweetURL() {
         return BASE_TWEET_URL + this.id;
+    }
+
+    public static String getHashtagURL(String hashtag) {
+        return BASE_HASHTAG_URL + hashtag;
     }
 }
