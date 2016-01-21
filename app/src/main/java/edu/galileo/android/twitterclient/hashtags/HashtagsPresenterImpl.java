@@ -6,7 +6,6 @@ import com.twitter.sdk.android.core.TwitterSession;
 import java.util.List;
 
 import edu.galileo.android.twitterclient.entities.Hashtag;
-import edu.galileo.android.twitterclient.events.HashtagEvent;
 import edu.galileo.android.twitterclient.lib.EventBus;
 
 /**
@@ -50,7 +49,7 @@ public class HashtagsPresenterImpl implements HashtagsPresenter {
     }
 
     @Override
-    public void onEventMainThread(HashtagEvent event) {
+    public void onEventMainThread(HashtagsEvent event) {
         String errorMsg = event.getError();
         if (this.hashtagsView != null) {
             hashtagsView.showList();

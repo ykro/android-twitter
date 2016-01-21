@@ -6,7 +6,6 @@ import com.twitter.sdk.android.core.TwitterSession;
 import java.util.List;
 
 import edu.galileo.android.twitterclient.entities.Image;
-import edu.galileo.android.twitterclient.events.ImageEvent;
 import edu.galileo.android.twitterclient.lib.EventBus;
 
 /**
@@ -51,7 +50,7 @@ public class ImagesPresenterImpl implements ImagesPresenter {
     }
 
     @Override
-    public void onEventMainThread(ImageEvent event) {
+    public void onEventMainThread(ImagesEvent event) {
         String errorMsg = event.getError();
         if (this.imagesView != null) {
             imagesView.showList();

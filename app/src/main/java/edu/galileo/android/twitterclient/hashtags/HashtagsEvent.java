@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.events;
+package edu.galileo.android.twitterclient.hashtags;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import edu.galileo.android.twitterclient.entities.Hashtag;
 /**
  * Created by ykro.
  */
-public class HashtagEvent {
+public class HashtagsEvent {
     private String error;
     private List<Hashtag> hashtags;
 

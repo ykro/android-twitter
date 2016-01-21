@@ -14,7 +14,6 @@ import java.util.List;
 
 import edu.galileo.android.twitterclient.api.ApiClient;
 import edu.galileo.android.twitterclient.entities.Hashtag;
-import edu.galileo.android.twitterclient.events.HashtagEvent;
 import edu.galileo.android.twitterclient.lib.EventBus;
 
 /**
@@ -77,13 +76,13 @@ public class HashtagsInteractorImpl implements HashtagsInteractor {
     }
 
     private void postEvent(String error) {
-        HashtagEvent event = new HashtagEvent();
+        HashtagsEvent event = new HashtagsEvent();
         event.setError(error);
         EventBus.getInstance().post(event);
     }
 
     private void postEvent(List<Hashtag> items) {
-        HashtagEvent event = new HashtagEvent();
+        HashtagsEvent event = new HashtagsEvent();
         event.setHashtags(items);
         EventBus.getInstance().post(event);
     }

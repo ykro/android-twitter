@@ -14,7 +14,6 @@ import java.util.List;
 
 import edu.galileo.android.twitterclient.api.ApiClient;
 import edu.galileo.android.twitterclient.entities.Image;
-import edu.galileo.android.twitterclient.events.ImageEvent;
 import edu.galileo.android.twitterclient.lib.EventBus;
 
 /**
@@ -30,7 +29,7 @@ public class ImagesInteractorImpl implements ImagesInteractor {
 
     @Override
     public void getImageItemsList() {
-        final ImageEvent event = new ImageEvent();
+        final ImagesEvent event = new ImagesEvent();
         client.getTimelineService().homeTimeline(TWEET_COUNT, true, true, true, true,
                 new Callback<List<Tweet>>() {
                     @Override
@@ -80,13 +79,13 @@ public class ImagesInteractorImpl implements ImagesInteractor {
     }
 
     private void postEvent(String error) {
-        ImageEvent event = new ImageEvent();
+        ImagesEvent event = new ImagesEvent();
         event.setError(error);
         EventBus.getInstance().post(event);
     }
 
     private void postEvent(List<Image> items) {
-        ImageEvent event = new ImageEvent();
+        ImagesEvent event = new ImagesEvent();
         event.setImages(items);
         EventBus.getInstance().post(event);
     }
