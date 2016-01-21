@@ -1,22 +1,24 @@
-package edu.galileo.android.twitterclient.api;
+package edu.galileo.android.twitterclient.repositories;
 
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterSession;
 
+import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
+
 /**
  * Created by ykro.
  */
-public class APIHelper {
+public class RepositoryHelper {
     CustomTwitterApiClient apiClient;
     private static class SingletonHolder {
-        private static final APIHelper INSTANCE = new APIHelper();
+        private static final RepositoryHelper INSTANCE = new RepositoryHelper();
     }
 
-    public static APIHelper getInstance() {
+    public static RepositoryHelper getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
-    public APIHelper(){
+    public RepositoryHelper(){
         TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
         apiClient = new CustomTwitterApiClient(session);
     }

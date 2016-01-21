@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import edu.galileo.android.twitterclient.api.APIHelper;
+import edu.galileo.android.twitterclient.repositories.RepositoryHelper;
 import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
 import edu.galileo.android.twitterclient.entities.Hashtag;
 import edu.galileo.android.twitterclient.lib.EventBus;
@@ -32,7 +32,7 @@ public class HashtagsRepository {
     }
 
     public HashtagsRepository() {
-        APIHelper helper = APIHelper.getInstance();
+        RepositoryHelper helper = RepositoryHelper.getInstance();
         this.client = helper.getAPIClient();
     }
 
