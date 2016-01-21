@@ -2,14 +2,11 @@ package edu.galileo.android.twitterclient.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -27,13 +24,11 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
     private List<TweetEntity> items;
     private ImageLoading imageLoadingHelper;
     private OnItemClickListener clickListener;
-Fragment fragment;
+
     public ImagesAdapter(Fragment fragment, List<TweetEntity> items, OnItemClickListener clickListener) {
         this.items = items;
         this.clickListener = clickListener;
-
-        this.fragment = fragment;
-        //imageLoadingHelper = new ImageLoading(context);
+        imageLoadingHelper = new ImageLoading(fragment);
     }
 
     @Override
@@ -47,12 +42,7 @@ Fragment fragment;
         TweetEntity tweet = items.get(position);
         holder.setClickListener(tweet, clickListener);
         holder.txtTweet.setText(tweet.getTweetText());
-
-        //imageLoadingHelper.loadImage(tweet.getImageURL(), holder.imgMedia);
-
-        Glide.with(fragment)
-                .load(tweet.getImageURL())
-                .into(holder.imgMedia);
+        imageLoadingHelper.loadImage(tweet.getImageURL(), holder.imgMedia);
     }
 
     @Override

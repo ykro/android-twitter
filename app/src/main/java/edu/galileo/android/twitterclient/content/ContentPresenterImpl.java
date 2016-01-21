@@ -13,12 +13,14 @@ import edu.galileo.android.twitterclient.lib.EventBus;
  * Created by ykro.
  */
 public class ContentPresenterImpl implements ContentPresenter {
-    EventBus eventBus;
-    ContentView loginView;
-    ContentInteractor contentInteractor;
+    private int contentType;
+    private EventBus eventBus;
+    private ContentView contentView;
+    private ContentInteractor contentInteractor;
 
-    public ContentPresenterImpl(ContentView loginView) {
-        this.loginView = loginView;
+    public ContentPresenterImpl(ContentView contentView, int contentType) {
+        this.contentType = contentType;
+        this.contentView = contentView;
         this.eventBus = EventBus.getInstance();
 
         TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
@@ -37,36 +39,37 @@ public class ContentPresenterImpl implements ContentPresenter {
 
     @Override
     public void onDestroy() {
-        this.loginView = null;
+        this.contentView = null;
     }
 
     @Override
-    public void getTweets(int type){
-        if (this.loginView != null){
-            loginView.hideList();
-            loginView.showProgress();
+    public void getTweets(){
+        if (this.contentView != null){
+            contentView.hideList();
+            contentView.showProgress();
         }
 
-        if (type == TweetEntity.IMAGES_CONTENT) {
+        if (contentType == TweetEntity.IMAGES_CONTENT) {
             this.contentInteractor.getImageItemsList();
         } else {
             this.contentInteractor.getHashtagItemsList();
         }
-
     }
 
     @Override
     public void onEventMainThread(TweetEvent event) {
         String errorMsg = event.getError();
-        if (this.loginView != null) {
-            loginView.showList();
-            loginView.hideProgress();
+        if (this.contentView != null) {
+            contentView.showList();
+            contentView.hideProgress();
             if (errorMsg != null) {
-                this.loginView.onImagesError(errorMsg);
+                this.contentView.onImagesError(errorMsg);
             } else {
                 List<TweetEntity> items = event.getItems();
-                if (items != null && !items.isEmpty()) {
-                    this.loginView.setItems(items);
+                if (items != null
+                        && !items.isEmpty()
+                        && event.getContentType() == contentType) {
+                    this.contentView.setItems(items);
                 }
             }
         }

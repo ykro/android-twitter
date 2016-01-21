@@ -43,6 +43,13 @@ public class HashtagsAdapter extends RecyclerView.Adapter<HashtagsAdapter.ViewHo
         holder.setClickListener(tweet, clickListener);
         holder.txtTweet.setText(tweet.getTweetText());
         holder.setItems(tweet.getHashtags());
+
+        /*
+        if (tweet.getImageURL() != null) {
+            Log.e("ASDF","imagen no nula " + (tweet.getHashtags() == null));
+        }
+        */
+
     }
 
     @Override

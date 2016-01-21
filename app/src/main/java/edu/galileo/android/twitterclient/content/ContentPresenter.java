@@ -9,6 +9,6 @@ public interface ContentPresenter {
     void onResume();
     void onPause();
     void onDestroy();
-    void getTweets(int type);
+    void getTweets();
     void onEventMainThread(TweetEvent event);
 }

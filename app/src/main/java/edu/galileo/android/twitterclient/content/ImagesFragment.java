@@ -34,7 +34,7 @@ public class ImagesFragment extends Fragment
     @Bind(R.id.recyclerView)  RecyclerView recyclerView;
 
     public ImagesFragment() {
-        contentPresenter = new ContentPresenterImpl(this);
+        contentPresenter = new ContentPresenterImpl(this, TweetEntity.IMAGES_CONTENT);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class ImagesFragment extends Fragment
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setAdapter(adapter);
 
-        contentPresenter.getTweets(TweetEntity.IMAGES_CONTENT);
+        contentPresenter.getTweets();
         return view;
     }
 

@@ -34,7 +34,7 @@ public class HashtagsFragment extends Fragment
     @Bind(R.id.recyclerView)  RecyclerView recyclerView;
 
     public HashtagsFragment() {
-        contentPresenter = new ContentPresenterImpl(this);
+        contentPresenter = new ContentPresenterImpl(this, TweetEntity.HASHTAGS_CONTENT);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class HashtagsFragment extends Fragment
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
-        contentPresenter.getTweets(TweetEntity.HASHTAGS_CONTENT);
+        contentPresenter.getTweets();
         return view;
     }
 

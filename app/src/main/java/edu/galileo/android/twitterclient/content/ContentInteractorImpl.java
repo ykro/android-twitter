@@ -1,7 +1,5 @@
 package edu.galileo.android.twitterclient.content;
 
-import android.util.Log;
-
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
@@ -11,6 +9,8 @@ import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import edu.galileo.android.twitterclient.api.ApiClient;
@@ -51,7 +51,6 @@ public class ContentInteractorImpl implements ContentInteractor {
 
                                 String tweetId = tweet.idStr;
                                 tweetModel.setId(tweetId);
-                                Log.e("ID",tweet.idStr);
 
                                 MediaEntity currentPhoto = tweet.entities.media.get(0);
                                 String imageURL = currentPhoto.mediaUrl;
@@ -60,13 +59,18 @@ public class ContentInteractorImpl implements ContentInteractor {
                                 items.add(tweetModel);
                             }
                         }
+                        Collections.sort(items, new Comparator<TweetEntity>() {
+                            public int compare(TweetEntity t1, TweetEntity t2) {
+                                return t2.getFavoriteCount() - t1.getFavoriteCount();
+                            }
+                        });
 
-                        postEvent(items);
+                        postEvent(items, TweetEntity.IMAGES_CONTENT);
                     }
 
                     @Override
                     public void failure(TwitterException e) {
-                        postEvent(e.getMessage());
+                        postEvent(e.getMessage(), TweetEntity.IMAGES_CONTENT);
                     }
                 }
         );
@@ -101,12 +105,17 @@ public class ContentInteractorImpl implements ContentInteractor {
                                 items.add(tweetModel);
                             }
                         }
-                        postEvent(items);
+                        Collections.sort(items, new Comparator<TweetEntity>() {
+                            public int compare(TweetEntity t1, TweetEntity t2) {
+                                return t2.getFavoriteCount() - t1.getFavoriteCount();
+                            }
+                        });
+                        postEvent(items, TweetEntity.HASHTAGS_CONTENT);
                     }
 
                     @Override
                     public void failure(TwitterException e) {
-                        postEvent(e.getMessage());
+                        postEvent(e.getMessage(), TweetEntity.HASHTAGS_CONTENT);
                     }
                 }
         );
@@ -124,14 +133,16 @@ public class ContentInteractorImpl implements ContentInteractor {
                 !tweet.entities.hashtags.isEmpty();
     }
 
-    private void postEvent(String error) {
+    private void postEvent(String error, int type) {
         TweetEvent event = new TweetEvent();
+        event.setContentType(type);
         event.setError(error);
         EventBus.getInstance().post(event);
     }
 
-    private void postEvent(List<TweetEntity> items) {
+    private void postEvent(List<TweetEntity> items, int type) {
         TweetEvent event = new TweetEvent();
+        event.setContentType(type);
         event.setItems(items);
         EventBus.getInstance().post(event);
     }
