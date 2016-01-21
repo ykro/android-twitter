@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by ykro.
  */
-public class TweetEntity {
+public class Hashtag {
     private String id;
     List<String> hashtags;
     private String imageURL;

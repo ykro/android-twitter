@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.content;
+package edu.galileo.android.twitterclient.hashtags;
 
 
 import android.content.Intent;
@@ -21,37 +21,37 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
 import edu.galileo.android.twitterclient.adapters.HashtagsAdapter;
-import edu.galileo.android.twitterclient.entities.TweetEntity;
+import edu.galileo.android.twitterclient.entities.Hashtag;
 
 public class HashtagsFragment extends Fragment
-                            implements ContentView, OnItemClickListener {
-    private List<TweetEntity> items;
+                            implements HashtagsView, OnItemClickListener {
+    private List<Hashtag> items;
     private RecyclerView.Adapter adapter;
-    private ContentPresenter contentPresenter;
+    private HashtagsPresenter hashtagsPresenter;
 
     @Bind(R.id.container) FrameLayout container;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.recyclerView)  RecyclerView recyclerView;
 
     public HashtagsFragment() {
-        contentPresenter = new ContentPresenterImpl(this, TweetEntity.HASHTAGS_CONTENT);
+        hashtagsPresenter = new HashtagsPresenterImpl(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        contentPresenter.onResume();
+        hashtagsPresenter.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        contentPresenter.onPause();
+        hashtagsPresenter.onPause();
     }
 
     @Override
     public void onDestroy() {
-        contentPresenter.onDestroy();
+        hashtagsPresenter.onDestroy();
         super.onDestroy();
     }
 
@@ -61,12 +61,12 @@ public class HashtagsFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this, view);
 
-        items = new ArrayList<TweetEntity>();
+        items = new ArrayList<Hashtag>();
         adapter = new HashtagsAdapter(getContext().getApplicationContext(), items, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
-        contentPresenter.getTweets();
+        hashtagsPresenter.getHashtagTweets();
         return view;
     }
 
@@ -76,7 +76,7 @@ public class HashtagsFragment extends Fragment
     }
 
     @Override
-    public void setItems(List<TweetEntity> newItems) {
+    public void setHashtags(List<Hashtag> newItems) {
         items.addAll(newItems);
         adapter.notifyDataSetChanged();
     }
@@ -102,7 +102,7 @@ public class HashtagsFragment extends Fragment
     }
 
     @Override
-    public void onItemClick(TweetEntity tweet) {
+    public void onItemClick(Hashtag tweet) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(tweet.getTweetURL()));
         startActivity(intent);
     }

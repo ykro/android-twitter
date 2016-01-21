@@ -12,36 +12,40 @@ import android.view.MenuItem;
 
 import com.twitter.sdk.android.Twitter;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.adapters.SectionsPagerAdapter;
-import edu.galileo.android.twitterclient.content.HashtagsFragment;
-import edu.galileo.android.twitterclient.content.ImagesFragment;
+import edu.galileo.android.twitterclient.adapters.MainSectionsPagerAdapter;
+import edu.galileo.android.twitterclient.hashtags.HashtagsFragment;
+import edu.galileo.android.twitterclient.images.ImagesFragment;
 import edu.galileo.android.twitterclient.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager mViewPager;
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.container) ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         Fragment[] fragments = new Fragment[] {new ImagesFragment(),
                                              new HashtagsFragment()};
+
         String[] titles = new String[] {getString(R.string.main_header_images),
                                         getString(R.string.main_header_hashtags)};
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), fragments, titles);
 
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        setSupportActionBar(toolbar);
+
+        MainSectionsPagerAdapter adapter = new MainSectionsPagerAdapter(getSupportFragmentManager(),
+                                                                        fragments,
+                                                                        titles);
+        viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override

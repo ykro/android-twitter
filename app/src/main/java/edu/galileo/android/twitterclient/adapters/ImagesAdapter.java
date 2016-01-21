@@ -13,19 +13,19 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.content.OnItemClickListener;
-import edu.galileo.android.twitterclient.entities.TweetEntity;
+import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.images.OnItemClickListener;
 import edu.galileo.android.twitterclient.lib.ImageLoading;
 
 /**
  * Created by ykro.
  */
 public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder> {
-    private List<TweetEntity> items;
+    private List<Image> items;
     private ImageLoading imageLoadingHelper;
     private OnItemClickListener clickListener;
 
-    public ImagesAdapter(Fragment fragment, List<TweetEntity> items, OnItemClickListener clickListener) {
+    public ImagesAdapter(Fragment fragment, List<Image> items, OnItemClickListener clickListener) {
         this.items = items;
         this.clickListener = clickListener;
         imageLoadingHelper = new ImageLoading(fragment);
@@ -39,7 +39,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        TweetEntity tweet = items.get(position);
+        Image tweet = items.get(position);
         holder.setClickListener(tweet, clickListener);
         holder.txtTweet.setText(tweet.getTweetText());
         imageLoadingHelper.loadImage(tweet.getImageURL(), holder.imgMedia);
@@ -62,7 +62,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
             this.view = view;
         }
 
-        public void setClickListener(final TweetEntity tweet,
+        public void setClickListener(final Image tweet,
                                      final OnItemClickListener listener) {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

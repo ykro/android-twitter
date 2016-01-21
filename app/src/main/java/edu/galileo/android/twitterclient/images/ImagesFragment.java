@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.content;
+package edu.galileo.android.twitterclient.images;
 
 
 import android.content.Intent;
@@ -21,37 +21,37 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
 import edu.galileo.android.twitterclient.adapters.ImagesAdapter;
-import edu.galileo.android.twitterclient.entities.TweetEntity;
+import edu.galileo.android.twitterclient.entities.Image;
 
 public class ImagesFragment extends Fragment
-                            implements ContentView, OnItemClickListener {
-    private List<TweetEntity> items;
+                            implements ImagesView, OnItemClickListener {
+    private List<Image> items;
     private RecyclerView.Adapter adapter;
-    private ContentPresenter contentPresenter;
+    private ImagesPresenter imagesPresenter;
 
     @Bind(R.id.container) FrameLayout container;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.recyclerView)  RecyclerView recyclerView;
 
     public ImagesFragment() {
-        contentPresenter = new ContentPresenterImpl(this, TweetEntity.IMAGES_CONTENT);
+        imagesPresenter = new ImagesPresenterImpl(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        contentPresenter.onResume();
+        imagesPresenter.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        contentPresenter.onPause();
+        imagesPresenter.onPause();
     }
 
     @Override
     public void onDestroy() {
-        contentPresenter.onDestroy();
+        imagesPresenter.onDestroy();
         super.onDestroy();
     }
 
@@ -61,12 +61,12 @@ public class ImagesFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this, view);
 
-        items = new ArrayList<TweetEntity>();
+        items = new ArrayList<Image>();
         adapter = new ImagesAdapter(this, items, this);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setAdapter(adapter);
 
-        contentPresenter.getTweets();
+        imagesPresenter.getImageTweets();
         return view;
     }
 
@@ -76,7 +76,7 @@ public class ImagesFragment extends Fragment
     }
 
     @Override
-    public void setItems(List<TweetEntity> newItems) {
+    public void setImages(List<Image> newItems) {
         items.addAll(newItems);
         adapter.notifyDataSetChanged();
     }
@@ -102,7 +102,7 @@ public class ImagesFragment extends Fragment
     }
 
     @Override
-    public void onItemClick(TweetEntity tweet) {
+    public void onItemClick(Image tweet) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(tweet.getTweetURL()));
         startActivity(intent);
     }

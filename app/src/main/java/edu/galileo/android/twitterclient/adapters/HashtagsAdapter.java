@@ -14,18 +14,19 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.content.OnItemClickListener;
-import edu.galileo.android.twitterclient.entities.TweetEntity;
+import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.hashtags.OnItemClickListener;
+
 
 /**
  * Created by ykro.
  */
 public class HashtagsAdapter extends RecyclerView.Adapter<HashtagsAdapter.ViewHolder> {
     private Context context;
-    private List<TweetEntity> items;
+    private List<Hashtag> items;
     private OnItemClickListener clickListener;
 
-    public HashtagsAdapter(Context context, List<TweetEntity> items, OnItemClickListener clickListener) {
+    public HashtagsAdapter(Context context, List<Hashtag> items, OnItemClickListener clickListener) {
         this.items = items;
         this.context = context;
         this.clickListener = clickListener;
@@ -39,17 +40,10 @@ public class HashtagsAdapter extends RecyclerView.Adapter<HashtagsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        TweetEntity tweet = items.get(position);
+        Hashtag tweet = items.get(position);
         holder.setClickListener(tweet, clickListener);
         holder.txtTweet.setText(tweet.getTweetText());
         holder.setItems(tweet.getHashtags());
-
-        /*
-        if (tweet.getImageURL() != null) {
-            Log.e("ASDF","imagen no nula " + (tweet.getHashtags() == null));
-        }
-        */
-
     }
 
     @Override
@@ -76,7 +70,7 @@ public class HashtagsAdapter extends RecyclerView.Adapter<HashtagsAdapter.ViewHo
             recyclerView.setAdapter(adapter);
         }
 
-        public void setClickListener(final TweetEntity tweet,
+        public void setClickListener(final Hashtag tweet,
                                      final OnItemClickListener listener) {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

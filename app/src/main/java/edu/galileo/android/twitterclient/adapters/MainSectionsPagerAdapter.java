@@ -7,11 +7,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 /**
  * Created by ykro.
  */
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class MainSectionsPagerAdapter extends FragmentPagerAdapter {
     private String[] titles;
     private Fragment[] fragments;
 
-    public SectionsPagerAdapter(FragmentManager fm, Fragment[] fragments, String[] titles) {
+    public MainSectionsPagerAdapter(FragmentManager fm, Fragment[] fragments, String[] titles) {
         super(fm);
         this.titles = titles;
         this.fragments = fragments;
