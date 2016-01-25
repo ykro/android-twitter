@@ -6,8 +6,8 @@ package edu.galileo.android.twitterclient.hashtags;
 public class HashtagsInteractorImpl implements HashtagsInteractor {
     private HashtagsRepository hashtagsRepository;
 
-    public HashtagsInteractorImpl() {
-        this.hashtagsRepository = HashtagsRepository.getInstance();
+    public HashtagsInteractorImpl(HashtagsRepository hashtagsRepository) {
+        this.hashtagsRepository = hashtagsRepository;
     }
 
     @Override

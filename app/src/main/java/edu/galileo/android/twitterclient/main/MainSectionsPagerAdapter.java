@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.adapters;
+package edu.galileo.android.twitterclient.main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

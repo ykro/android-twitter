@@ -1,8 +1,5 @@
 package edu.galileo.android.twitterclient.images;
 
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.core.TwitterSession;
-
 import java.util.List;
 
 import edu.galileo.android.twitterclient.entities.Image;
@@ -14,12 +11,13 @@ import edu.galileo.android.twitterclient.lib.EventBus;
 public class ImagesPresenterImpl implements ImagesPresenter {
     private EventBus eventBus;
     private ImagesView imagesView;
-    private ImagesInteractor imagesInteractor;
+    private final ImagesInteractor imagesInteractor;
 
-    public ImagesPresenterImpl(ImagesView imagesView) {
-        this.imagesView = imagesView;
+    public ImagesPresenterImpl(ImagesView imagesView, ImagesInteractor imagesInteractor) {
         this.eventBus = EventBus.getInstance();
-        this.imagesInteractor = new ImagesInteractorImpl();
+
+        this.imagesView = imagesView;
+        this.imagesInteractor = imagesInteractor;
     }
 
     @Override

@@ -17,24 +17,31 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.adapters.HashtagsAdapter;
 import edu.galileo.android.twitterclient.entities.Hashtag;
 
 public class HashtagsFragment extends Fragment
                             implements HashtagsView, OnItemClickListener {
     private List<Hashtag> items;
     private RecyclerView.Adapter adapter;
-    private HashtagsPresenter hashtagsPresenter;
+
+    @Inject
+    HashtagsPresenter hashtagsPresenter;
 
     @Bind(R.id.container) FrameLayout container;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.recyclerView)  RecyclerView recyclerView;
 
     public HashtagsFragment() {
-        hashtagsPresenter = new HashtagsPresenterImpl(this);
+        DaggerHashtagsComponent
+                .builder()
+                .hashtagsModule(new HashtagsModule(this))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -61,15 +68,22 @@ public class HashtagsFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this, view);
 
-        items = new ArrayList<Hashtag>();
-        adapter = new HashtagsAdapter(getContext().getApplicationContext(), items, this);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        setupAdapter();
+        setupRecyclerView();
 
         hashtagsPresenter.getHashtagTweets();
         return view;
+    }
+
+    private void setupRecyclerView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void setupAdapter() {
+        items = new ArrayList<Hashtag>();
+        adapter = new HashtagsAdapter(getContext().getApplicationContext(), items, this);
     }
 
     @Override

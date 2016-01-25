@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.adapters;
+package edu.galileo.android.twitterclient.images;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +14,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
 import edu.galileo.android.twitterclient.entities.Image;
-import edu.galileo.android.twitterclient.images.OnItemClickListener;
 import edu.galileo.android.twitterclient.lib.ImageLoading;
 
 /**

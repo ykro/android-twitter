@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.adapters;
+package edu.galileo.android.twitterclient.hashtags;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
 import edu.galileo.android.twitterclient.entities.Hashtag;
-import edu.galileo.android.twitterclient.hashtags.OnItemClickListener;
+import edu.galileo.android.twitterclient.ui.CustomGridLayoutManager;
 
 
 /**

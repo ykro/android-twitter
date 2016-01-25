@@ -1,13 +1,16 @@
 package edu.galileo.android.twitterclient.images;
 
+import javax.inject.Inject;
+
 /**
  * Created by ykro.
  */
 public class ImagesInteractorImpl implements ImagesInteractor {
-    private ImagesRepository imagesRepository;
+    private final ImagesRepository imagesRepository;
 
-    public ImagesInteractorImpl() {
-        this.imagesRepository = ImagesRepository.getInstance();
+    @Inject
+    public ImagesInteractorImpl(ImagesRepository imagesRepository) {
+        this.imagesRepository = imagesRepository;
     }
 
     @Override

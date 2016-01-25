@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.adapters;
+package edu.galileo.android.twitterclient.ui;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;

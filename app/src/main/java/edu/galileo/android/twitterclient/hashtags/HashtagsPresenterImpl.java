@@ -13,10 +13,10 @@ public class HashtagsPresenterImpl implements HashtagsPresenter {
     private HashtagsView hashtagsView;
     private HashtagsInteractor hashtagsInteractor;
 
-    public HashtagsPresenterImpl(HashtagsView hashtagsView) {
-        this.hashtagsView = hashtagsView;
+    public HashtagsPresenterImpl(HashtagsView hashtagsView, HashtagsInteractor hashtagsInteractor) {
         this.eventBus = EventBus.getInstance();
-        this.hashtagsInteractor = new HashtagsInteractorImpl();
+        this.hashtagsView = hashtagsView;
+        this.hashtagsInteractor = hashtagsInteractor;
     }
 
     @Override

@@ -17,24 +17,31 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.adapters.ImagesAdapter;
 import edu.galileo.android.twitterclient.entities.Image;
 
 public class ImagesFragment extends Fragment
                             implements ImagesView, OnItemClickListener {
     private List<Image> items;
     private RecyclerView.Adapter adapter;
-    private ImagesPresenter imagesPresenter;
+
+
+    @Inject ImagesPresenter imagesPresenter;
 
     @Bind(R.id.container) FrameLayout container;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.recyclerView)  RecyclerView recyclerView;
 
     public ImagesFragment() {
-        imagesPresenter = new ImagesPresenterImpl(this);
+        DaggerImagesComponent
+                .builder()
+                .imagesModule(new ImagesModule(this))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -61,14 +68,21 @@ public class ImagesFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this, view);
 
-        items = new ArrayList<Image>();
-        adapter = new ImagesAdapter(this, items, this);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        recyclerView.setAdapter(adapter);
-
+        setupAdapter();
+        setupRecyclerView();
         imagesPresenter.getImageTweets();
+
         return view;
     }
+
+    private void setupRecyclerView() {
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void setupAdapter() {
+        items = new ArrayList<Image>();
+        adapter = new ImagesAdapter(this, items, this);    }
 
     @Override
     public void onImagesError(String error) {

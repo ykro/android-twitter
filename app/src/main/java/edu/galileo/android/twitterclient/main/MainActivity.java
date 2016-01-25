@@ -15,7 +15,6 @@ import com.twitter.sdk.android.Twitter;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.adapters.MainSectionsPagerAdapter;
 import edu.galileo.android.twitterclient.hashtags.HashtagsFragment;
 import edu.galileo.android.twitterclient.images.ImagesFragment;
 import edu.galileo.android.twitterclient.login.LoginActivity;
