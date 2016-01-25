@@ -25,7 +25,9 @@ public class HashtagsAdapter extends RecyclerView.Adapter<HashtagsAdapter.ViewHo
     private List<Hashtag> items;
     private OnItemClickListener clickListener;
 
-    public HashtagsAdapter(Context context, List<Hashtag> items, OnItemClickListener clickListener) {
+    public HashtagsAdapter(Context context,
+                           List<Hashtag> items,
+                           OnItemClickListener clickListener) {
         this.items = items;
         this.context = context;
         this.clickListener = clickListener;
@@ -48,6 +50,11 @@ public class HashtagsAdapter extends RecyclerView.Adapter<HashtagsAdapter.ViewHo
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public void setItems(List<Hashtag> newItems) {
+        items.addAll(newItems);
+        notifyDataSetChanged();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

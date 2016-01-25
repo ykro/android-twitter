@@ -13,9 +13,8 @@ public class ImagesPresenterImpl implements ImagesPresenter {
     private ImagesView imagesView;
     private final ImagesInteractor imagesInteractor;
 
-    public ImagesPresenterImpl(ImagesView imagesView, ImagesInteractor imagesInteractor) {
-        this.eventBus = EventBus.getInstance();
-
+    public ImagesPresenterImpl(ImagesView imagesView, ImagesInteractor imagesInteractor, EventBus eventBus) {
+        this.eventBus = eventBus;
         this.imagesView = imagesView;
         this.imagesInteractor = imagesInteractor;
     }

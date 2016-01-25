@@ -3,11 +3,17 @@ package edu.galileo.android.twitterclient.images;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterSession;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
+import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.lib.EventBus;
+import edu.galileo.android.twitterclient.lib.ImageLoading;
 
 /**
  * Created by ykro.
@@ -15,8 +21,28 @@ import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
 @Module
 public class ImagesModule {
     private ImagesView view;
-    public ImagesModule(ImagesView view) {
+    private OnItemClickListener clickListener;
+
+    public ImagesModule(ImagesView view, OnItemClickListener clickListener) {
         this.view = view;
+        this.clickListener = clickListener;
+    }
+
+    @Provides
+    @Singleton
+    List<Image> provideItems() {
+        return new ArrayList<Image>();
+    }
+
+    @Provides
+    @Singleton
+    OnItemClickListener provideClickListener() {
+        return this.clickListener;
+    }
+
+    @Provides
+    public ImagesAdapter provideAdapter(List<Image> items, OnItemClickListener clickListener, ImageLoading imageLoadingHelper) {
+        return new ImagesAdapter(items, clickListener, imageLoadingHelper);
     }
 
     @Provides
@@ -27,8 +53,8 @@ public class ImagesModule {
 
     @Provides
     @Singleton
-    ImagesPresenter provideImagesPresenter(ImagesView view, ImagesInteractor interactor) {
-        return new ImagesPresenterImpl(view, interactor);
+    ImagesPresenter provideImagesPresenter(ImagesView view, ImagesInteractor interactor, EventBus eventBus) {
+        return new ImagesPresenterImpl(view, interactor, eventBus);
     }
 
     @Provides
@@ -39,8 +65,8 @@ public class ImagesModule {
 
     @Provides
     @Singleton
-    ImagesRepository provideImagesRepository(CustomTwitterApiClient client) {
-        return new ImagesRepositoryImpl(client);
+    ImagesRepository provideImagesRepository(CustomTwitterApiClient client, EventBus eventBus) {
+        return new ImagesRepositoryImpl(client, eventBus);
     }
 
     @Provides

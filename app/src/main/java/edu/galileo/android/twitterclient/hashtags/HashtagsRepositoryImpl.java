@@ -19,11 +19,13 @@ import edu.galileo.android.twitterclient.lib.EventBus;
  * Created by ykro.
  */
 public class HashtagsRepositoryImpl implements HashtagsRepository {
+    private final EventBus eventBus;
     private final CustomTwitterApiClient client;
     private final static int TWEET_COUNT = 100;
 
-    public HashtagsRepositoryImpl(CustomTwitterApiClient client) {
+    public HashtagsRepositoryImpl(CustomTwitterApiClient client, EventBus eventBus) {
         this.client = client;
+        this.eventBus = eventBus;
     }
 
     public void getHashtags(){
@@ -75,12 +77,12 @@ public class HashtagsRepositoryImpl implements HashtagsRepository {
     private void postEvent(String error) {
         HashtagsEvent event = new HashtagsEvent();
         event.setError(error);
-        EventBus.getInstance().post(event);
+        eventBus.post(event);
     }
 
     private void postEvent(List<Hashtag> items) {
         HashtagsEvent event = new HashtagsEvent();
         event.setHashtags(items);
-        EventBus.getInstance().post(event);
+        eventBus.post(event);
     }
 }

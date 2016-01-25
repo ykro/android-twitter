@@ -1,13 +1,20 @@
 package edu.galileo.android.twitterclient.hashtags;
 
+import android.content.Context;
+
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterSession;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
+import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.lib.EventBus;
 
 /**
  * Created by ykro.
@@ -15,8 +22,28 @@ import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
 @Module
 public class HashtagsModule {
     private HashtagsView view;
-    public HashtagsModule(HashtagsView view) {
+    private OnItemClickListener clickListener;
+
+    public HashtagsModule(HashtagsView view, OnItemClickListener clickListener) {
         this.view = view;
+        this.clickListener = clickListener;
+    }
+
+    @Provides
+    @Singleton
+    List<Hashtag> provideItems() {
+        return new ArrayList<Hashtag>();
+    }
+
+    @Provides
+    @Singleton
+    OnItemClickListener provideClickListener() {
+        return this.clickListener;
+    }
+
+    @Provides
+    public HashtagsAdapter provideAdapter(Context context, List<Hashtag> items, OnItemClickListener clickListener) {
+        return new HashtagsAdapter(context, items, clickListener);
     }
 
     @Provides
@@ -27,8 +54,8 @@ public class HashtagsModule {
 
     @Provides
     @Singleton
-    HashtagsPresenter provideHashtagsPresenter(HashtagsView view, HashtagsInteractor interactor) {
-        return new HashtagsPresenterImpl(view, interactor);
+    HashtagsPresenter provideHashtagsPresenter(HashtagsView view, HashtagsInteractor interactor, EventBus eventBus) {
+        return new HashtagsPresenterImpl(view, interactor, eventBus);
     }
 
     @Provides
@@ -39,8 +66,8 @@ public class HashtagsModule {
 
     @Provides
     @Singleton
-    HashtagsRepository provideHashtagsRepository(CustomTwitterApiClient client) {
-        return new HashtagsRepositoryImpl(client);
+    HashtagsRepository provideHashtagsRepository(CustomTwitterApiClient client, EventBus eventBus) {
+        return new HashtagsRepositoryImpl(client, eventBus);
     }
 
     @Provides

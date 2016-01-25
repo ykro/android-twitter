@@ -11,14 +11,14 @@ import io.fabric.sdk.android.Fabric;
  * Created by ykro.
  */
 public class TwitterClientApp extends Application {
-    //TwitterClientComponent component;
+    TwitterAppComponent component;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         initFabric();
-        initInjector();
+        //initInjector();
     }
 
     private void initFabric() {
@@ -27,18 +27,13 @@ public class TwitterClientApp extends Application {
     }
 
     private void initInjector() {
-        /*
-        component = DaggerTwitterClientComponent
+        component = DaggerTwitterAppComponent
                     .builder()
-                    //.twitterClientModule(new TwitterClientModule(this))
-                    .twitterClientModule(new TwitterClientModule())
+                    .twitterAppModule(new TwitterAppModule(this))
                     .build();
-                    */
     }
 
-    /*
-    public TwitterClientComponent getComponent() {
+    public TwitterAppComponent getComponent() {
         return component;
     }
-    */
 }

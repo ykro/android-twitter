@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,26 +22,17 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
 import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.lib.LibsModule;
 
 public class ImagesFragment extends Fragment
                             implements ImagesView, OnItemClickListener {
-    private List<Image> items;
-    private RecyclerView.Adapter adapter;
 
-
+    @Inject ImagesAdapter adapter;
     @Inject ImagesPresenter imagesPresenter;
 
     @Bind(R.id.container) FrameLayout container;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.recyclerView)  RecyclerView recyclerView;
-
-    public ImagesFragment() {
-        DaggerImagesComponent
-                .builder()
-                .imagesModule(new ImagesModule(this))
-                .build()
-                .inject(this);
-    }
 
     @Override
     public void onResume() {
@@ -68,11 +58,20 @@ public class ImagesFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this, view);
 
-        setupAdapter();
+        setupInjection();
         setupRecyclerView();
         imagesPresenter.getImageTweets();
 
         return view;
+    }
+
+    private void setupInjection() {
+        DaggerImagesComponent
+                .builder()
+                .libsModule(new LibsModule(this))
+                .imagesModule(new ImagesModule(this, this))
+                .build()
+                .inject(this);
     }
 
     private void setupRecyclerView() {
@@ -80,19 +79,14 @@ public class ImagesFragment extends Fragment
         recyclerView.setAdapter(adapter);
     }
 
-    private void setupAdapter() {
-        items = new ArrayList<Image>();
-        adapter = new ImagesAdapter(this, items, this);    }
-
     @Override
     public void onImagesError(String error) {
         Snackbar.make(container, error, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
-    public void setImages(List<Image> newItems) {
-        items.addAll(newItems);
-        adapter.notifyDataSetChanged();
+    public void setImages(List<Image> items) {
+        adapter.setItems(items);
     }
 
     @Override

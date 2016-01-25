@@ -1,6 +1,5 @@
 package edu.galileo.android.twitterclient.images;
 
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +23,12 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
     private ImageLoading imageLoadingHelper;
     private OnItemClickListener clickListener;
 
-    public ImagesAdapter(Fragment fragment, List<Image> items, OnItemClickListener clickListener) {
+    public ImagesAdapter(List<Image> items,
+                         OnItemClickListener clickListener,
+                         ImageLoading imageLoadingHelper) {
         this.items = items;
         this.clickListener = clickListener;
-        imageLoadingHelper = new ImageLoading(fragment);
+        this.imageLoadingHelper = imageLoadingHelper;
     }
 
     @Override
@@ -47,6 +48,11 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public void setItems(List<Image> newItems) {
+        items.addAll(newItems);
+        notifyDataSetChanged();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

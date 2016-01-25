@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,27 +21,19 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
+import edu.galileo.android.twitterclient.TwitterAppModule;
 import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.lib.LibsModule;
 
 public class HashtagsFragment extends Fragment
                             implements HashtagsView, OnItemClickListener {
-    private List<Hashtag> items;
-    private RecyclerView.Adapter adapter;
 
-    @Inject
-    HashtagsPresenter hashtagsPresenter;
+    @Inject HashtagsAdapter adapter;
+    @Inject HashtagsPresenter hashtagsPresenter;
 
     @Bind(R.id.container) FrameLayout container;
     @Bind(R.id.progressBar) ProgressBar progressBar;
     @Bind(R.id.recyclerView)  RecyclerView recyclerView;
-
-    public HashtagsFragment() {
-        DaggerHashtagsComponent
-                .builder()
-                .hashtagsModule(new HashtagsModule(this))
-                .build()
-                .inject(this);
-    }
 
     @Override
     public void onResume() {
@@ -68,22 +59,28 @@ public class HashtagsFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this, view);
 
-        setupAdapter();
+        setupInjection();
         setupRecyclerView();
 
         hashtagsPresenter.getHashtagTweets();
         return view;
     }
 
+    private void setupInjection() {
+        DaggerHashtagsComponent
+                .builder()
+                .libsModule(new LibsModule(this))
+                .twitterAppModule(new TwitterAppModule(getContext()))
+                .hashtagsModule(new HashtagsModule(this, this))
+                .build()
+                .inject(this);
+    }
+
+
     private void setupRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-    }
-
-    private void setupAdapter() {
-        items = new ArrayList<Hashtag>();
-        adapter = new HashtagsAdapter(getContext().getApplicationContext(), items, this);
     }
 
     @Override
@@ -92,9 +89,8 @@ public class HashtagsFragment extends Fragment
     }
 
     @Override
-    public void setHashtags(List<Hashtag> newItems) {
-        items.addAll(newItems);
-        adapter.notifyDataSetChanged();
+    public void setHashtags(List<Hashtag> items) {
+        adapter.setItems(items);
     }
 
     @Override

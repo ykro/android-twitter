@@ -6,20 +6,8 @@ package edu.galileo.android.twitterclient.lib;
 public class EventBus {
     de.greenrobot.event.EventBus eventBus;
 
-    private static class SingletonHolder {
-        private static final EventBus INSTANCE = new EventBus();
-    }
-
-    public static EventBus getInstance() {
-        return SingletonHolder.INSTANCE;
-    }
-
     public EventBus(){
         eventBus = de.greenrobot.event.EventBus.getDefault();
-    }
-
-    public void isRegistered(Object subscriber){
-        eventBus.isRegistered(subscriber);
     }
 
     public void register(Object subscriber){
