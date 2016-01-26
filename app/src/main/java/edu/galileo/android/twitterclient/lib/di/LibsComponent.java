@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.lib;
+package edu.galileo.android.twitterclient.lib.di;
 
 import javax.inject.Singleton;
 

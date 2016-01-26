@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.lib;
+package edu.galileo.android.twitterclient.lib.di;
 
 import android.support.v4.app.Fragment;
 
@@ -6,13 +6,15 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import edu.galileo.android.twitterclient.lib.EventBus;
+import edu.galileo.android.twitterclient.lib.ImageLoading;
 
 /**
  * Created by ykro.
  */
 @Module
 public class LibsModule {
-    Fragment fragment;
+    private Fragment fragment;
 
     public LibsModule(Fragment fragment) {
         this.fragment = fragment;
