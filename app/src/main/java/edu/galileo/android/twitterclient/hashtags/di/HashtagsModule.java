@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.hashtags;
+package edu.galileo.android.twitterclient.hashtags.di;
 
 import android.content.Context;
 
@@ -14,6 +14,15 @@ import dagger.Module;
 import dagger.Provides;
 import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
 import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.hashtags.HashtagsInteractor;
+import edu.galileo.android.twitterclient.hashtags.HashtagsInteractorImpl;
+import edu.galileo.android.twitterclient.hashtags.HashtagsPresenter;
+import edu.galileo.android.twitterclient.hashtags.HashtagsPresenterImpl;
+import edu.galileo.android.twitterclient.hashtags.HashtagsRepository;
+import edu.galileo.android.twitterclient.hashtags.HashtagsRepositoryImpl;
+import edu.galileo.android.twitterclient.hashtags.ui.HashtagsView;
+import edu.galileo.android.twitterclient.hashtags.ui.OnItemClickListener;
+import edu.galileo.android.twitterclient.hashtags.adapters.HashtagsAdapter;
 import edu.galileo.android.twitterclient.lib.EventBus;
 
 /**
@@ -42,7 +51,7 @@ public class HashtagsModule {
     }
 
     @Provides
-    public HashtagsAdapter provideAdapter(Context context, List<Hashtag> items, OnItemClickListener clickListener) {
+    HashtagsAdapter provideAdapter(Context context, List<Hashtag> items, OnItemClickListener clickListener) {
         return new HashtagsAdapter(context, items, clickListener);
     }
 

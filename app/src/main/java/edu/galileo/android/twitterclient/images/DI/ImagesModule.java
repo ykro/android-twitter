@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.images;
+package edu.galileo.android.twitterclient.images.di;
 
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -12,6 +12,15 @@ import dagger.Module;
 import dagger.Provides;
 import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
 import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.images.adapters.ImagesAdapter;
+import edu.galileo.android.twitterclient.images.ImagesInteractor;
+import edu.galileo.android.twitterclient.images.ImagesInteractorImpl;
+import edu.galileo.android.twitterclient.images.ImagesPresenter;
+import edu.galileo.android.twitterclient.images.ImagesPresenterImpl;
+import edu.galileo.android.twitterclient.images.ImagesRepository;
+import edu.galileo.android.twitterclient.images.ImagesRepositoryImpl;
+import edu.galileo.android.twitterclient.images.ui.ImagesView;
+import edu.galileo.android.twitterclient.images.ui.OnItemClickListener;
 import edu.galileo.android.twitterclient.lib.EventBus;
 import edu.galileo.android.twitterclient.lib.ImageLoading;
 
@@ -41,7 +50,7 @@ public class ImagesModule {
     }
 
     @Provides
-    public ImagesAdapter provideAdapter(List<Image> items, OnItemClickListener clickListener, ImageLoading imageLoadingHelper) {
+    ImagesAdapter provideAdapter(List<Image> items, OnItemClickListener clickListener, ImageLoading imageLoadingHelper) {
         return new ImagesAdapter(items, clickListener, imageLoadingHelper);
     }
 

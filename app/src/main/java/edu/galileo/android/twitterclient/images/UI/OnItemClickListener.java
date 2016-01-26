@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.images;
+package edu.galileo.android.twitterclient.images.ui;
 
 import edu.galileo.android.twitterclient.entities.Image;
 

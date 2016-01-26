@@ -1,5 +1,7 @@
 package edu.galileo.android.twitterclient.images;
 
+import edu.galileo.android.twitterclient.images.events.ImagesEvent;
+
 /**
  * Created by ykro.
  */

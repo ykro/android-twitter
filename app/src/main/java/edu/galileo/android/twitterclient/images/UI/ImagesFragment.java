@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.hashtags;
+package edu.galileo.android.twitterclient.images.ui;
 
 
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,15 +21,20 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.TwitterAppModule;
-import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.images.di.DaggerImagesComponent;
+import edu.galileo.android.twitterclient.images.di.ImagesModule;
+import edu.galileo.android.twitterclient.images.ImagesPresenter;
+import edu.galileo.android.twitterclient.images.adapters.ImagesAdapter;
 import edu.galileo.android.twitterclient.lib.LibsModule;
 
-public class HashtagsFragment extends Fragment
-                            implements HashtagsView, OnItemClickListener {
+public class ImagesFragment extends Fragment
+                            implements ImagesView, OnItemClickListener {
 
-    @Inject HashtagsAdapter adapter;
-    @Inject HashtagsPresenter hashtagsPresenter;
+    @Inject
+    ImagesAdapter adapter;
+    @Inject
+    ImagesPresenter imagesPresenter;
 
     @Bind(R.id.container) FrameLayout container;
     @Bind(R.id.progressBar) ProgressBar progressBar;
@@ -38,18 +43,18 @@ public class HashtagsFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        hashtagsPresenter.onResume();
+        imagesPresenter.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        hashtagsPresenter.onPause();
+        imagesPresenter.onPause();
     }
 
     @Override
     public void onDestroy() {
-        hashtagsPresenter.onDestroy();
+        imagesPresenter.onDestroy();
         super.onDestroy();
     }
 
@@ -61,25 +66,22 @@ public class HashtagsFragment extends Fragment
 
         setupInjection();
         setupRecyclerView();
+        imagesPresenter.getImageTweets();
 
-        hashtagsPresenter.getHashtagTweets();
         return view;
     }
 
     private void setupInjection() {
-        DaggerHashtagsComponent
+        DaggerImagesComponent
                 .builder()
                 .libsModule(new LibsModule(this))
-                .twitterAppModule(new TwitterAppModule(getContext()))
-                .hashtagsModule(new HashtagsModule(this, this))
+                .imagesModule(new ImagesModule(this, this))
                 .build()
                 .inject(this);
     }
 
-
     private void setupRecyclerView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setAdapter(adapter);
     }
 
@@ -89,7 +91,7 @@ public class HashtagsFragment extends Fragment
     }
 
     @Override
-    public void setHashtags(List<Hashtag> items) {
+    public void setImages(List<Image> items) {
         adapter.setItems(items);
     }
 
@@ -114,7 +116,7 @@ public class HashtagsFragment extends Fragment
     }
 
     @Override
-    public void onItemClick(Hashtag tweet) {
+    public void onItemClick(Image tweet) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(tweet.getTweetURL()));
         startActivity(intent);
     }

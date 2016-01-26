@@ -1,5 +1,7 @@
 package edu.galileo.android.twitterclient.hashtags;
 
+import edu.galileo.android.twitterclient.hashtags.events.HashtagsEvent;
+
 /**
  * Created by ykro.
  */

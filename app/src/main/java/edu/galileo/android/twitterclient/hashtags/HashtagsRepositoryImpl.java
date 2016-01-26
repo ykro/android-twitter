@@ -13,6 +13,7 @@ import java.util.List;
 
 import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
 import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.hashtags.events.HashtagsEvent;
 import edu.galileo.android.twitterclient.lib.EventBus;
 
 /**

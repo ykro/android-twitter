@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.hashtags;
+package edu.galileo.android.twitterclient.hashtags.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/loginContainer"
-    tools:context=".login.LoginActivity">
+    tools:context=".login.ui.LoginActivity">
 
     <com.twitter.sdk.android.core.identity.TwitterLoginButton
         android:id="@+id/twitterLoginButton"

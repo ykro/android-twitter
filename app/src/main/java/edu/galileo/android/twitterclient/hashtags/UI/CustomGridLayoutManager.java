@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.ui;
+package edu.galileo.android.twitterclient.hashtags.ui;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;

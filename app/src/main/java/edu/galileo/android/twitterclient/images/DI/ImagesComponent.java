@@ -1,8 +1,9 @@
-package edu.galileo.android.twitterclient.images;
+package edu.galileo.android.twitterclient.images.di;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
+import edu.galileo.android.twitterclient.images.ui.ImagesFragment;
 import edu.galileo.android.twitterclient.lib.LibsModule;
 
 /**

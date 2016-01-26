@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.main;
+package edu.galileo.android.twitterclient.main.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +15,10 @@ import com.twitter.sdk.android.Twitter;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.hashtags.HashtagsFragment;
-import edu.galileo.android.twitterclient.images.ImagesFragment;
-import edu.galileo.android.twitterclient.login.LoginActivity;
+import edu.galileo.android.twitterclient.hashtags.ui.HashtagsFragment;
+import edu.galileo.android.twitterclient.images.ui.ImagesFragment;
+import edu.galileo.android.twitterclient.login.ui.LoginActivity;
+import edu.galileo.android.twitterclient.main.adapters.MainSectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container"
-    tools:context=".hashtags.HashtagsFragment">
+    tools:context=".hashtags.ui.HashtagsFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

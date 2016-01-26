@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.hashtags;
+package edu.galileo.android.twitterclient.hashtags.events;
 
 import java.util.List;
 
