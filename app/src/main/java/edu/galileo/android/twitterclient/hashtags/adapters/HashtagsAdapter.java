@@ -13,7 +13,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.hashtags.entities.Hashtag;
 import edu.galileo.android.twitterclient.hashtags.ui.OnItemClickListener;
 import edu.galileo.android.twitterclient.hashtags.ui.CustomGridLayoutManager;
 

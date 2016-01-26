@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
-import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.images.entities.Image;
 import edu.galileo.android.twitterclient.images.adapters.ImagesAdapter;
 import edu.galileo.android.twitterclient.images.ImagesInteractor;
 import edu.galileo.android.twitterclient.images.ImagesInteractorImpl;

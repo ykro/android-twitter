@@ -1,6 +1,6 @@
 package edu.galileo.android.twitterclient.images.ui;
 
-import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.images.entities.Image;
 
 /**
  * Created by ykro.

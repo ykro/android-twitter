@@ -1,6 +1,6 @@
 package edu.galileo.android.twitterclient.hashtags.ui;
 
-import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.hashtags.entities.Hashtag;
 
 /**
  * Created by ykro.

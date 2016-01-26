@@ -1,13 +1,17 @@
-package edu.galileo.android.twitterclient.entities;
+package edu.galileo.android.twitterclient.hashtags.entities;
+
+import java.util.List;
 
 /**
  * Created by ykro.
  */
-public class Image {
+public class Hashtag {
     private String id;
     private String imageURL;
     private String tweetText;
     private int favoriteCount;
+    private List<String> hashtags;
+
     private final static String BASE_TWEET_URL = "https://twitter.com/null/status/";
 
     public String getId() {
@@ -32,6 +36,14 @@ public class Image {
 
     public void setFavoriteCount(int favoriteCount) {
         this.favoriteCount = favoriteCount;
+    }
+
+    public List<String> getHashtags() {
+        return hashtags;
+    }
+
+    public void setHashtags(List<String> hashtags) {
+        this.hashtags = hashtags;
     }
 
     public String getImageURL() {

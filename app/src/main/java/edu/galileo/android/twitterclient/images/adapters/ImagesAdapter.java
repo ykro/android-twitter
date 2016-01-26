@@ -12,7 +12,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.images.entities.Image;
 import edu.galileo.android.twitterclient.images.ui.OnItemClickListener;
 import edu.galileo.android.twitterclient.lib.ImageLoading;
 

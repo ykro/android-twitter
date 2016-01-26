@@ -1,7 +1,5 @@
 package edu.galileo.android.twitterclient.images;
 
-import android.util.Log;
-
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
@@ -14,7 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
-import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.images.entities.Image;
 import edu.galileo.android.twitterclient.images.events.ImagesEvent;
 import edu.galileo.android.twitterclient.lib.EventBus;
 

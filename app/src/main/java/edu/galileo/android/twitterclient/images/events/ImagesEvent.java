@@ -2,7 +2,7 @@ package edu.galileo.android.twitterclient.images.events;
 
 import java.util.List;
 
-import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.images.entities.Image;
 
 /**
  * Created by ykro.

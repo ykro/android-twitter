@@ -22,7 +22,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
 import edu.galileo.android.twitterclient.TwitterAppModule;
-import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.hashtags.entities.Hashtag;
 import edu.galileo.android.twitterclient.hashtags.HashtagsPresenter;
 import edu.galileo.android.twitterclient.hashtags.adapters.HashtagsAdapter;
 import edu.galileo.android.twitterclient.hashtags.di.DaggerHashtagsComponent;

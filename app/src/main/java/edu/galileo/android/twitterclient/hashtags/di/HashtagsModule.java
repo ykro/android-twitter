@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
-import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.hashtags.entities.Hashtag;
 import edu.galileo.android.twitterclient.hashtags.HashtagsInteractor;
 import edu.galileo.android.twitterclient.hashtags.HashtagsInteractorImpl;
 import edu.galileo.android.twitterclient.hashtags.HashtagsPresenter;

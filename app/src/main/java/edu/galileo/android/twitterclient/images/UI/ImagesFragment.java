@@ -21,7 +21,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
-import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.images.entities.Image;
 import edu.galileo.android.twitterclient.images.di.DaggerImagesComponent;
 import edu.galileo.android.twitterclient.images.di.ImagesModule;
 import edu.galileo.android.twitterclient.images.ImagesPresenter;
