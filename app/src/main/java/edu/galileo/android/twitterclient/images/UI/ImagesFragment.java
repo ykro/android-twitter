@@ -26,7 +26,7 @@ import edu.galileo.android.twitterclient.images.di.DaggerImagesComponent;
 import edu.galileo.android.twitterclient.images.di.ImagesModule;
 import edu.galileo.android.twitterclient.images.ImagesPresenter;
 import edu.galileo.android.twitterclient.images.adapters.ImagesAdapter;
-import edu.galileo.android.twitterclient.lib.LibsModule;
+import edu.galileo.android.twitterclient.lib.di.LibsModule;
 
 public class ImagesFragment extends Fragment
                             implements ImagesView, OnItemClickListener {

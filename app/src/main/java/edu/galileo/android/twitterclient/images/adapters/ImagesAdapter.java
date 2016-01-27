@@ -14,22 +14,22 @@ import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
 import edu.galileo.android.twitterclient.images.entities.Image;
 import edu.galileo.android.twitterclient.images.ui.OnItemClickListener;
-import edu.galileo.android.twitterclient.lib.ImageLoading;
+import edu.galileo.android.twitterclient.lib.ImageLoader;
 
 /**
  * Created by ykro.
  */
 public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder> {
     private List<Image> items;
-    private ImageLoading imageLoadingHelper;
+    private ImageLoader imageLoader;
     private OnItemClickListener clickListener;
 
     public ImagesAdapter(List<Image> items,
                          OnItemClickListener clickListener,
-                         ImageLoading imageLoadingHelper) {
+                         ImageLoader imageLoader) {
         this.items = items;
         this.clickListener = clickListener;
-        this.imageLoadingHelper = imageLoadingHelper;
+        this.imageLoader = imageLoader;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ViewHolder
         Image tweet = items.get(position);
         holder.setClickListener(tweet, clickListener);
         holder.txtTweet.setText(tweet.getTweetText());
-        imageLoadingHelper.loadImage(tweet.getImageURL(), holder.imgMedia);
+        imageLoader.load(holder.imgMedia, tweet.getImageURL());
     }
 
     @Override

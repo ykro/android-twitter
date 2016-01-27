@@ -52,7 +52,7 @@ public class HashtagsPresenterImpl implements HashtagsPresenter {
             hashtagsView.showList();
             hashtagsView.hideProgress();
             if (errorMsg != null) {
-                this.hashtagsView.onImagesError(errorMsg);
+                this.hashtagsView.onHashtagsError(errorMsg);
             } else {
                 List<Hashtag> items = event.getHashtags();
                 if (items != null && !items.isEmpty()) {

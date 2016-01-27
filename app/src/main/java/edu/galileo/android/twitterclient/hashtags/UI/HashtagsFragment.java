@@ -27,7 +27,7 @@ import edu.galileo.android.twitterclient.hashtags.HashtagsPresenter;
 import edu.galileo.android.twitterclient.hashtags.adapters.HashtagsAdapter;
 import edu.galileo.android.twitterclient.hashtags.di.DaggerHashtagsComponent;
 import edu.galileo.android.twitterclient.hashtags.di.HashtagsModule;
-import edu.galileo.android.twitterclient.lib.LibsModule;
+import edu.galileo.android.twitterclient.lib.di.LibsModule;
 
 public class HashtagsFragment extends Fragment
                             implements HashtagsView, OnItemClickListener {
@@ -90,7 +90,7 @@ public class HashtagsFragment extends Fragment
     }
 
     @Override
-    public void onImagesError(String error) {
+    public void onHashtagsError(String error) {
         Snackbar.make(container, error, Snackbar.LENGTH_SHORT).show();
     }
 

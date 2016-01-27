@@ -13,6 +13,6 @@ public interface HashtagsView {
     void showProgress();
     void hideProgress();
 
-    void onImagesError(String error);
+    void onHashtagsError(String error);
     void setHashtags(List<Hashtag> items);
 }

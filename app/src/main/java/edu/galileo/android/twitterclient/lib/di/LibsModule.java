@@ -7,7 +7,9 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import edu.galileo.android.twitterclient.lib.EventBus;
-import edu.galileo.android.twitterclient.lib.ImageLoading;
+import edu.galileo.android.twitterclient.lib.GlideImageLoader;
+import edu.galileo.android.twitterclient.lib.GreenRobotEventBus;
+import edu.galileo.android.twitterclient.lib.ImageLoader;
 
 /**
  * Created by ykro.
@@ -23,18 +25,18 @@ public class LibsModule {
     @Provides
     @Singleton
     EventBus provideEventBus() {
-        return new EventBus();
+        return new GreenRobotEventBus();
     }
 
     @Provides
     @Singleton
-    ImageLoading provideImageLoading(Fragment fragment) {
-        return new ImageLoading(fragment);
+    ImageLoader provideImageLoader(Fragment fragment) {
+        return new GlideImageLoader(fragment);
     }
 
     @Provides
     @Singleton
-    Fragment provideImageLoadingFragment() {
+    Fragment provideImageLoaderFragment() {
         return this.fragment;
     }
 }
