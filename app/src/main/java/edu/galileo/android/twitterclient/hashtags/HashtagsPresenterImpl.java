@@ -1,5 +1,7 @@
 package edu.galileo.android.twitterclient.hashtags;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.List;
 
 import edu.galileo.android.twitterclient.hashtags.entities.Hashtag;
@@ -46,6 +48,7 @@ public class HashtagsPresenterImpl implements HashtagsPresenter {
     }
 
     @Override
+    @Subscribe
     public void onEventMainThread(HashtagsEvent event) {
         String errorMsg = event.getError();
         if (this.hashtagsView != null) {
